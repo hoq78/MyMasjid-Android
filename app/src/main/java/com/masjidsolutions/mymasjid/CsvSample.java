@@ -17,125 +17,89 @@ class CsvSample {
     private String MaghribJ;
     private String IshaJ;
 
+    public CsvSample(String date, String day, String fajr, String sunrise, String zuhr, String khutbah, String asr, String maghrib, String isha, String fajrJ, String zuhrJ, String khutbahJ, String asrJ, String maghribJ, String ishaJ) {
+        Date = date;
+        Day = day;
+        Fajr = fajr;
+        Sunrise = sunrise;
+        Zuhr = zuhr;
+        Khutbah = khutbah;
+        Asr = asr;
+        Maghrib = maghrib;
+        Isha = isha;
+        FajrJ = fajrJ;
+        ZuhrJ = zuhrJ;
+        KhutbahJ = khutbahJ;
+        AsrJ = asrJ;
+        MaghribJ = maghribJ;
+        IshaJ = ishaJ;
+    }
 
-    public String getDate() {
+    public  CsvSample(String error ){
+        Date = error;
+        Day = error;
+        Fajr = error;
+        Sunrise = error;
+        Zuhr = error;
+        Khutbah = error;
+        Asr = error;
+        Maghrib = error;
+        Isha = error;
+        FajrJ = error;
+        ZuhrJ = error;
+        KhutbahJ = error;
+        AsrJ = error;
+        MaghribJ = error;
+        IshaJ = error;
+    }
+
+    String getDate() {
         return Date;
     }
 
-    public void setDate(String date) {
-        Date = date;
-    }
-
-    public String getDay() {
-        return Day;
-    }
-
-    public void setDay(String day) {
-        Day = day;
-    }
-
-    public String getFajr() {
+     String getFajr() {
         return Fajr;
     }
 
-    public void setFajr(String fajr) {
-        Fajr = fajr;
-    }
-
-    public String getSunrise() {
-        return Sunrise;
-    }
-
-    public void setSunrise(String sunrise) {
-        Sunrise = sunrise;
-    }
-
-    public String getZuhr() {
+     String getZuhr() {
         return Zuhr;
     }
 
-    public void setZuhr(String zuhr) {
-        Zuhr = zuhr;
-    }
-
-    public String getKhutbah() {
-        return Khutbah;
-    }
-
-    public void setKhutbah(String khutbah) {
-        Khutbah = khutbah;
-    }
-
-    public String getAsr() {
+     String getAsr() {
         return Asr;
     }
 
-    public void setAsr(String asr) {
-        Asr = asr;
-    }
-
-    public String getMaghrib() {
+     String getMaghrib() {
         return Maghrib;
     }
 
-    public void setMaghrib(String maghrib) {
-        Maghrib = maghrib;
-    }
-
-    public String getIsha() {
+     String getIsha() {
         return Isha;
     }
 
-    public void setIsha(String isha) {
-        Isha = isha;
-    }
-
-    public String getFajrJ() {
+     String getFajrJ() {
         return FajrJ;
     }
 
-    public void setFajrJ(String fajrJ) {
-        FajrJ = fajrJ;
-    }
-
-    public String getZuhrJ() {
+     String getZuhrJ() {
         return ZuhrJ;
     }
-
-    public void setZuhrJ(String zuhrJ) {
-        ZuhrJ = zuhrJ;
-    }
-
-    public String getKhutbahJ() {
+     String getKhutbahJ() {
         return KhutbahJ;
     }
 
-    public void setKhutbahJ(String khutbahJ) {
-        KhutbahJ = khutbahJ;
-    }
-
-    public String getAsrJ() {
+     String getAsrJ() {
         return AsrJ;
     }
 
-    public void setAsrJ(String asrJ) {
-        AsrJ = asrJ;
-    }
 
-    public String getMaghribJ() {
+     String getMaghribJ() {
         return MaghribJ;
     }
 
-    public void setMaghribJ(String maghribJ) {
-        MaghribJ = maghribJ;
-    }
 
-    public String getIshaJ() {
+     String getIshaJ() {
         return IshaJ;
-    }
-
-    public void setIshaJ(String ishaJ) {
-        IshaJ = ishaJ;
     }
 
     @Override
