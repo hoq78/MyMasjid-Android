@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainpage"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:background="@drawable/bg">
+
+
+
+<TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:alpha="1"
+        android:background="#806C6C6C"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constrainedWidth="true"
+
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        android:layout_height="0dp">
+
+
+    <TableRow
+        android:id="@+id/masjidNameRow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/masjidNametxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="MasjidName"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/headerRow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/prayer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.25"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="@string/prayer"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:autoSizeMaxTextSize="60sp"
+            app:autoSizeMinTextSize="17sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/startTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.25"
+            android:enabled="false"
+            android:gravity="center"
+            android:text="Start"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="60sp"
+            app:autoSizeMinTextSize="24sp"
+            app:autoSizeStepGranularity="1sp"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/jamaatTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.25"
+            android:enabled="false"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="Jamaa'at"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="18sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform" />
+
+        <TextView
+            android:id="@+id/tJamaat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.25"
+            android:enabled="false"
+            android:gravity="center|center_horizontal|center_vertical"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:maxLines="2"
+            android:singleLine="false"
+            android:text="Tomorrow's Jamaa'at"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textScaleX="1"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="10sp"
+            app:autoSizeStepGranularity="10sp"
+            app:autoSizeTextType="uniform" />
+    </TableRow>
+
+    <TableRow
+            android:id="@+id/fajrRow"
+            android:layout_width="0dp"
+            android:layout_height="180dp"
+            android:layout_weight="1"
+            android:alpha="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+
+            <TextView
+                android:id="@+id/fajr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="@string/fajr"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="24sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/fajr1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/fajr2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/fajr3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/zuhrRow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/zuhr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="Zuhr"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="24sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/zuhr1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/zuhr2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/zuhr3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/asrRow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/asr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="Asr"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="24sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/asr1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/asr2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/asr3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/maghribRow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/maghrib"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:singleLine="true"
+                android:text="Maghrib"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="45sp"
+                app:autoSizeMinTextSize="17sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/maghrib1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/maghrib2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/maghrib3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/ishaRow"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/isha"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center|center_horizontal"
+                android:text="Isha"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="24sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/isha1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/isha2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+
+            <TextView
+                android:id="@+id/isha3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.25"
+                android:gravity="center"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="50sp"
+                app:autoSizeMinTextSize="19sp"
+                app:autoSizeStepGranularity="1sp"
+                app:autoSizeTextType="uniform" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/jummaRow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/khutba1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="00:00"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:autoSizeMaxTextSize="60sp"
+                app:autoSizeMinTextSize="10sp"
+                app:autoSizeStepGranularity="10sp"
+                app:autoSizeTextType="uniform"
+                tools:ignore="RtlCompat" />
+
+        </TableRow>
+
+    <TableRow
+        android:id="@+id/countDownRow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/common_google_signin_btn_text_light_default">
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+
+            android:gravity="center|clip_vertical|center_vertical"
+            android:textColor="#FFFFFF"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:autoSizeMaxTextSize="40sp"
+            app:autoSizeMinTextSize="20sp"
+            app:autoSizeStepGranularity="10sp" />
+    </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/marquee"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="1"
+        android:background="#806C6C6C"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:maxLines="5"
+        android:minLines="2"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:singleLine="true"
+        android:textColor="#F6F4F4"
+        android:textColorHint="#FFFFFF"
+        android:textStyle="bold"
+        app:autoSizeMaxTextSize="35sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+        tools:ignore="TextViewEdits"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#80454343"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        app:title="@string/app_name"
+        app:titleMarginStart="@android:dimen/app_icon_size"
+        app:titleTextColor="#FFFFFF"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-6dp"
+        tools:textAlignment="center" />
+
+
+    <ImageButton
+        android:id="@+id/settingsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:alpha="0"
+        android:background="@drawable/ic_settings_blue_24dp"
+        android:contentDescription="@string/action_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/ic_settings_blue_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/signout"
+        android:layout_width="0dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center_horizontal"
+        android:onClick="logout"
+        android:text="@string/log_out"
+        android:textColor="#007AFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:background="#D33A3A3A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/vidbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:lines="2"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="Live Video"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+        <Button
+
+            android:id="@+id/audioBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="20dp"
+            android:background="@color/cardview_shadow_end_color"
+            android:lines="2"
+            android:maxLines="4"
+            android:singleLine="false"
+            android:text="@string/live_adhaan"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <ImageButton
+        android:id="@+id/refreshButton"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/ic_refresh_black_24dp"
+        android:clickable="true"
+        android:onClick="refreshButton"
+        app:layout_constraintEnd_toStartOf="@+id/signout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/events"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".Main2Activity">
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:background="#80454343"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/calenderBtn"
+            android:layout_width="57dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="153dp"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_date_range_blue_28dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="Calendar"
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="590dp" />
+
+        <TextView
+            android:id="@+id/homeBtn"
+            android:layout_width="57dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/ic_home_white_28dp"
+            android:gravity="center"
+            android:text="Home"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="590dp" />
+
+        <TextView
+            android:id="@+id/prayerBtn"
+            android:layout_width="57dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="283dp"
+            android:layout_marginTop="6dp"
+            android:drawableTop="@drawable/ic_access_time_white_28dp"
+            android:gravity="center"
+            android:text="Prayer Times"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:textSize="8sp"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="590dp" />
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#80454343"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        app:logo="@drawable/ic_settings_white_24dp"
+        app:logoDescription="Settings"
+        app:title="@string/app_name"
+        app:titleMarginStart="@android:dimen/app_icon_size"
+        app:titleTextColor="#FFFFFF"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-6dp"
+        tools:textAlignment="center" />
+
+
+    <CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#92FFFFFF"
+        android:clickable="true"
+        android:firstDayOfWeek="5"
+        android:focusableInTouchMode="true"
+        android:maxDate="31/12/2100"
+        android:minDate="01/01/1900"
+        android:unfocusedMonthDateColor="#BC2828"
+        android:weekNumberColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

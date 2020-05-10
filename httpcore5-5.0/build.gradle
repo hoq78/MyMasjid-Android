@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('httpcore5-5.0.jar'))

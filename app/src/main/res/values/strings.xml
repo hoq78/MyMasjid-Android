@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">MyMasjid</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="load_file_from_server">load from server</string>
+    <string name="textview">TextView</string>
+    <string name="Salaat_Times">ListDisplay</string>
+    <string name="action_settings">Settings</string>
+    <string name="fajr">Fajr</string>
+    <string name="prayer">Prayer</string>
+    <string name="log_out">Log Out</string>
+    <string name="calendar">Calendar</string>
+
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+    <string name="level_text">Level %1$d</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">YOUR_INTERSTITIAL_AD_UNIT_ID</string>
+    <string name="play">play</string>
+    <string name="live_adhaan">Live Adhaan</string>
+
+</resources>

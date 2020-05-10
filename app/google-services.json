@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1061171048722",
+    "firebase_url": "https://masjidsolutions-be41d.firebaseio.com",
+    "project_id": "masjidsolutions-be41d",
+    "storage_bucket": "masjidsolutions-be41d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061171048722:android:6c3e9e485f17164c2643cb",
+        "android_client_info": {
+          "package_name": "com.masjidsolutions.mymasjid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061171048722-5rqpsdmu588d0avvvm420jjl8tpaogpt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiDCmn2WDCAZ9t2sGQY1RxkwQssFzDPfc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061171048722-5rqpsdmu588d0avvvm420jjl8tpaogpt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061171048722-i5lsptpmthh4m1ok7dqt79646rcvp3q5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.masjidsolutions.MyMasjid"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
