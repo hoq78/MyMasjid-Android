@@ -125,13 +125,10 @@ public class MainActivity extends AppCompatActivity {
         Date tomorrowDateObject = calendar.getTime ();
         Date todayDate = new Date();
 
-        Button livebutton =  findViewById( R.id.audioBtn);
-        ImageButton imgbutton =  findViewById(R.id.refreshButton);
+        Button liveButton =  findViewById( R.id.audioBtn);
+        ImageButton refreshButton =  findViewById(R.id.refreshButton);
         ImageButton settingsButton =  findViewById( R.id.settingsBtn );
         Button videoButton = findViewById(R.id.vidbutton);
-
-
-
 
 
         getWindow().addFlags( WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -139,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         //Get the masjid information from the database and assign it to masjid object
         masjidobject = Utilities.getDatabaseData(this);
 //        Reads the CSV data from the file
-        readCsvData ();
+        Utilities.readCsvData (this,csvSamples);
         //Set the toolbar at the top of the screen
         Utilities.setToolbar(this,todayDate);
 
@@ -150,7 +147,8 @@ public class MainActivity extends AppCompatActivity {
         //initialise the table view
         initTable();
 
-        imgbutton.setOnClickListener(new View.OnClickListener() {
+        //handle what happens when the refresh button is pressed
+        refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
                 Intent intent = getIntent();
@@ -159,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Handle what happens when the settings button is pressed
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v) {
@@ -166,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        livebutton.setOnClickListener(new View.OnClickListener() {
+        //Handle wat happens when the liveAudio button is pressed
+        liveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
                 Intent audioIntent = new Intent( getApplicationContext(),LiveCallToPrayer.class );
@@ -176,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        //Handle what happens when the live Video button is pressed
         videoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Do something in response to button click
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+        //set the table data in the table view for today's information
         try {
             today = getPrayerTimes ( csvSamples, todayDate);
             fajr1.setText ( today.getFajr  () );
@@ -208,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace ();
         }
+        // set the table data in the table view for tomorrow's information
         try {
             tomorrow = getPrayerTimes ( csvSamples,tomorrowDateObject );
             fajr3.setText ( tomorrow.getFajrJ () );
@@ -229,8 +229,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView countdownLabel =  findViewById(R.id.countdown);
         final Calendar calendar = Calendar.getInstance();
         calendar.add ( Calendar.DAY_OF_YEAR, 1 );
-
-
 
         handler = new android.os.Handler(Looper.getMainLooper());
         final Runnable runnable = new Runnable() {
@@ -257,7 +255,6 @@ public class MainActivity extends AppCompatActivity {
                         eventDate = dateFormat.parse(_currentDate + " " + nextJammat.get(1) + ":00");
                     }catch (Exception e){e.printStackTrace();}
                 }
-
                 try {
 
                     Date currentdate = new Date();
@@ -283,9 +280,6 @@ public class MainActivity extends AppCompatActivity {
                             countdownLabel.setText("Fajr  " + hourString + ":" + minString + ":" + secondString);
                         }else{countdownLabel.setText(nextJammat.get(0) + "  " + hourString + ":" + minString + ":" + secondString);}
 
-
-
-
                         if (minutes == 0 && seconds == 0 && hours == 0) {
                             initTable();
                             handler.removeCallbacks(this);
@@ -302,19 +296,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void initTable() {
         try {
             nextJammat = getNextJamaat();
+            Log.d("nextJammat","NexJammat is :" + nextJammat);
             setBanner(nextJammat);
             countdown(nextJammat);
-            Notification notif = Utilities.getNotification(this,nextJammat);
+            List <Notification> notif = Utilities.getNotification(this,nextJammat);
             createReminder(this,notif,nextJammat);
         }catch (Exception e ){
             e.printStackTrace();
         }
-
     }
 
 
@@ -343,26 +336,25 @@ public class MainActivity extends AppCompatActivity {
 
         if(nextJammat.get(0).equals("Fajr")){
             row = (TableRow) findViewById(R.id.fajrRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         } else if (nextJammat.get(0).equals("Zuhr")){
             row = (TableRow) findViewById(R.id.zuhrRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         }else if (nextJammat.get(0).equals("Asr")){
             row = (TableRow) findViewById(R.id.asrRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         }else if (nextJammat.get(0).equals("Maghrib")){
             row = (TableRow) findViewById(R.id.maghribRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         }else if (nextJammat.get(0).equals("Isha")){
             row = (TableRow) findViewById(R.id.ishaRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         }else{
             row = (TableRow) findViewById(R.id.fajrRow);
-            row.setBackgroundResource(color.red);
+            row.setBackgroundResource(R.drawable.nexthighlight);
         }
 
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public List<String> getNextJamaat() throws ParseException {
@@ -388,30 +380,36 @@ public class MainActivity extends AppCompatActivity {
         if(checktimings(todaysDateString,today.getFajrJ())){
 
             nextJammat.add("Fajr");
+            nextJammat.add(today.getFajr());
             nextJammat.add(today.getFajrJ());
             return nextJammat;
         }else if (checktimings(todaysDateString,today.getZuhrJ())){
 
 
             nextJammat.add("Zuhr");
+            nextJammat.add(today.getZuhr());
             nextJammat.add(today.getZuhrJ());
             return nextJammat;
         }else if (checktimings(todaysDateString,today.getAsrJ())){
 
             nextJammat.add("Asr");
+            nextJammat.add(today.getAsr());
             nextJammat.add(today.getAsrJ());
             return nextJammat;
         }else if (checktimings(todaysDateString,today.getMaghribJ())){
             nextJammat.add("Maghrib");
+            nextJammat.add(today.getMaghrib());
             nextJammat.add(today.getMaghribJ());
             return nextJammat;
         }else if (checktimings(todaysDateString,today.getIshaJ())){
             nextJammat.add("Isha");
+            nextJammat.add(today.getIsha());
             nextJammat.add(today.getIshaJ());
             return nextJammat;
         }
 
         nextJammat.add("Fajr2");
+        nextJammat.add(tomorrow.getFajr());
         nextJammat.add(tomorrow.getFajrJ());
         return nextJammat;
     }
@@ -431,7 +429,6 @@ public class MainActivity extends AppCompatActivity {
         int lengthOfCSV = csvData.size();
         //format the date string to MM/dd/yyyy
         SimpleDateFormat format = new SimpleDateFormat ( "MM/dd/yyyy", Locale.UK );
-        String dateobjectString = date.toString ();
         DateTimeComparator dateTimeComparator = DateTimeComparator.getDateOnlyInstance();
 
 
@@ -449,49 +446,6 @@ public class MainActivity extends AppCompatActivity {
         CsvSample Error = new CsvSample ("");
         return Error;
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    private void readCsvData() {
-        String path = getFilesDir ().getAbsolutePath ();
-        path = path + "/timetable.csv";
-        try {
-            InputStream is = openFileInput( "timetable.csv" );
-            BufferedReader reader = new BufferedReader (
-                    new InputStreamReader (is, StandardCharsets.UTF_8)
-            );
-
-            String line = "";
-            try {
-                //Ignore header row
-                reader.readLine ();
-                while ( (line = reader.readLine()) != null) {
-
-                    //Split the data by ','
-                    String[] tokens = line.split (",");
-                    //Read the data
-                    CsvSample sample = new CsvSample (tokens[0],tokens[1],tokens[2],tokens[3],tokens[4],tokens[5],tokens[6],tokens[7],
-                    tokens[8],tokens[9],tokens[10],tokens[11],tokens[12],tokens[13],tokens[14]);
-
-                    csvSamples.add ( sample );
-
-                }
-
-            } catch (IOException e) {
-                Log.wtf ( "Read Error","error reading data on line" + line,e );
-            }
-            DatatypeConfigurationException e;
-            e = new DatatypeConfigurationException();
-            e.printStackTrace ();
-        }catch (FileNotFoundException e) {
-            e.printStackTrace ();
-        }
-
-//        is = getResources ().openRawResource ( path );
-//        InputStream is =getResources ().openRawResource ( R.raw.timetable );
-
-        }
-
-
 
     public void  logout (View view) {
         FirebaseAuth.getInstance().signOut();

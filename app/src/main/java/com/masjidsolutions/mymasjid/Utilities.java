@@ -31,6 +31,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationBuilderWithBuilderAccessor;
 import androidx.core.app.NotificationCompat;
 
 import com.github.msarhan.ummalqura.calendar.UmmalquraCalendar;
@@ -43,6 +44,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,11 +52,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -285,19 +290,34 @@ class Utilities {
         } catch (Exception e){e.printStackTrace();}
     }
 
-    static void createReminder(Activity activity,Notification notification, List<String> jammatTime ){
-        Intent notificationIntent = new Intent(activity, NotificationPublisher.class);
-        notificationIntent.putExtra( NOTIFICATION_ID, 1);
-        notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        long delay = getTimeDiff(jammatTime);
-        long futureInMillis = SystemClock.elapsedRealtime() + delay - 900000;
-        AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
-        assert alarmManager != null;
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+    static void createReminder(Activity activity, List<Notification> notification, List<String> jammatTime ){
+        for(int i = 0; i< notification.size(); i++){
+            if (i != 0){
+                Intent notificationIntent = new Intent(activity, NotificationPublisher.class);
+                notificationIntent.putExtra( NOTIFICATION_ID, 1);
+                notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification.get(0));
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                long delay = getTimeDiff(jammatTime,1);
+                long futureInMillis = SystemClock.elapsedRealtime() + delay;
+                AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+                assert alarmManager != null;
+                alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+            } else {
+                Intent notificationIntent = new Intent(activity, NotificationPublisher.class);
+                notificationIntent.putExtra( NOTIFICATION_ID, 1);
+                notificationIntent.putExtra(NotificationPublisher.NOTIFICATION, notification.get(1));
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(activity, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                long delay = getTimeDiff(jammatTime,2);
+                long futureInMillis = SystemClock.elapsedRealtime() + delay - 900000;
+                AlarmManager alarmManager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+                assert alarmManager != null;
+                alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, futureInMillis, pendingIntent);
+            }
+        }
+
     }
 
-    private static long getTimeDiff(List<String> nextJammat) {
+    private static long getTimeDiff(List<String> nextJammat,int index) {
         Calendar calendar = Calendar.getInstance();
         calendar.add ( Calendar.DATE, 1 );
         String notfTime="";
@@ -309,9 +329,9 @@ class Utilities {
         String _currentDate = format.format(currentdate);
         String _tomorrowDate = format.format(tomorrowObject);
         if(nextJammat.get(0).equals("Fajr2")){
-            notfTime = _tomorrowDate + " " + nextJammat.get(1);
+            notfTime = _tomorrowDate + " " + nextJammat.get(index);
         }else{
-            notfTime = _currentDate + " " + nextJammat.get(1);
+            notfTime = _currentDate + " " + nextJammat.get(index);
 
         }
         try {
@@ -324,7 +344,7 @@ class Utilities {
         return notifDateObj.getTime() - currentdate.getTime();
     }
 
-     static Notification getNotification(MainActivity activity,List<String> nextJammat) {
+     static List <Notification> getNotification(MainActivity activity,List<String> nextJammat) {
         String channelId = "Prayers";
         Intent notificationIntent = new Intent(activity.getApplicationContext() , LiveCallToPrayer.class);
 
@@ -333,36 +353,91 @@ class Utilities {
 
         PendingIntent intent = PendingIntent.getActivity(activity.getApplicationContext() , 0,
                 notificationIntent, 0);
-        NotificationCompat.Builder builder = null;
-        if (nextJammat.get(0).equals("Fajr1")){
-            builder = new NotificationCompat.Builder(activity, channelId)
-                    .setContentTitle(activity.getString(R.string.app_name))
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + " is at "+ nextJammat.get(1) + "\nView All Prayer Times."))
-                    .setContentText("Fajr is at "+ nextJammat.get(1) + "\nView All Prayer Times.")
-                    .setTicker(activity.getString(R.string.app_name))
-                    .setContentIntent( intent )
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setDefaults(Notification.DEFAULT_SOUND)
-                    .setAutoCancel(true);
-            Log.i(TAG, "notification built");
-        } else {
-            UsageEvents.Event context = null;
-            assert context != null;
+            NotificationCompat.Builder azaan = null;
+            NotificationCompat.Builder jammat = null;
 
-            builder = new NotificationCompat.Builder(activity, channelId)
-                    .setContentTitle(activity.getString(R.string.app_name))
-                    .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + " is at "+ nextJammat.get(1) + "\nView All Prayer Times."))
-                    .setContentText(nextJammat.get(0) + " is at "+ nextJammat.get(1) + "\nView All Prayer Times.")
-                    .setTicker(activity.getString(R.string.app_name))
-                    .setContentIntent(intent)
-                    .setSmallIcon(R.drawable.ic_launcher)
-                    .setDefaults(Notification.DEFAULT_SOUND)
-                    .setAutoCancel(true);
-            Log.i(TAG, "notification built");
+            if (nextJammat.get(0).equals("Fajr2")){
+                azaan = new NotificationCompat.Builder(activity,channelId)
+                            .setContentTitle(activity.getString(R.string.app_name))
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + "azaan is at "+ nextJammat.get(1) + "\nPress here to hear the Azaan Live"))
+                            .setContentText("Fajr Azaan is at "+ nextJammat.get(1) + "\nPress here to hear the Azaan Live.")
+                            .setTicker(activity.getString(R.string.app_name))
+                            .setContentIntent( intent )
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setDefaults(Notification.DEFAULT_SOUND)
+                            .setAutoCancel(true);
+
+                jammat = new NotificationCompat.Builder(activity,channelId)
+                            .setContentTitle(activity.getString(R.string.app_name))
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + " is at "+ nextJammat.get(2) + "\nPress Here To View All Prayer Times."))
+                            .setContentText("Fajr Jammat is at "+ nextJammat.get(1) + "\nPress Here To View All Prayer Times.")
+                            .setTicker(activity.getString(R.string.app_name))
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setDefaults(Notification.DEFAULT_SOUND)
+                            .setAutoCancel(true);
+            }else{
+                azaan = new NotificationCompat.Builder(activity, channelId)
+                            .setContentTitle(activity.getString(R.string.app_name))
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + " is at "+ nextJammat.get(1) + "\nView All Prayer Times."))
+                            .setContentText(nextJammat.get(0) + " azaan is at "+ nextJammat.get(1) + "\nPress here to hear the Azaan Live.")
+                            .setTicker(activity.getString(R.string.app_name))
+                            .setContentIntent(intent)
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setDefaults(Notification.DEFAULT_SOUND)
+                            .setAutoCancel(true);
+
+                jammat = new NotificationCompat.Builder(activity,channelId)
+                            .setContentTitle(activity.getString(R.string.app_name))
+                            .setStyle(new NotificationCompat.BigTextStyle().bigText(nextJammat.get(0) + " is at "+ nextJammat.get(2) + "\nPress Here To View All Prayer Times."))
+                            .setContentText(nextJammat.get(0) + " azaan is at "+ nextJammat.get(2) + "\nPress Here To View All Prayer Times.")
+                            .setTicker(activity.getString(R.string.app_name))
+                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setDefaults(Notification.DEFAULT_SOUND)
+                            .setAutoCancel(true);
+
+            }
+
+            List<Notification> notifications = new ArrayList<Notification>();
+            notifications.add(azaan.build());
+            notifications.add(jammat.build());
+
+        return notifications;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    static void readCsvData(Activity activity, List<CsvSample> csvSamples) {
+        String path = activity.getFilesDir ().getAbsolutePath ();
+        path = path + "/timetable.csv";
+        try {
+            InputStream is = activity.openFileInput( "timetable.csv" );
+            BufferedReader reader = new BufferedReader (
+                    new InputStreamReader (is, StandardCharsets.UTF_8)
+            );
+
+            String line = "";
+            try {
+                //Ignore header row
+                reader.readLine ();
+                while ( (line = reader.readLine()) != null) {
+
+                    //Split the data by ','
+                    String[] tokens = line.split (",");
+                    //Read the data
+                    CsvSample sample = new CsvSample (tokens[0],tokens[1],tokens[2],tokens[3],tokens[4],tokens[5],tokens[6],tokens[7],
+                            tokens[8],tokens[9],tokens[10],tokens[11],tokens[12],tokens[13],tokens[14]);
+
+                    csvSamples.add ( sample );
+                }
+
+            } catch (IOException e) {
+                Log.wtf ( "Read Error","error reading data on line" + line,e );
+            }
+            DatatypeConfigurationException e;
+            e = new DatatypeConfigurationException();
+            e.printStackTrace ();
+        }catch (FileNotFoundException e) {
+            e.printStackTrace ();
         }
-
-
-        return builder.build();
     }
 
 
